@@ -10,12 +10,12 @@ import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
 
-function CreateCabinForm({ cabinToupdate = {} }) {
-  const { id: updateId, ...updateValues } = cabinToupdate;
-  const isupdateSession = Boolean(updateId);
+function CreateCabinForm({ cabinToUpdate = {} }) {
+  const { id: updateId, ...updateValues } = cabinToUpdate;
+  const isUpdateSession = Boolean(updateId);
 
   const { register, handleSubmit, reset, getValues, formState } = useForm({
-    defaultValues: isupdateSession ? updateValues : {},
+    defaultValues: isUpdateSession ? updateValues : {},
   });
   const { isCreating, createCabin } = useCreateCabin();
   const { isUpdating, updateCabin } = useUpdateCabin();
@@ -27,7 +27,7 @@ function CreateCabinForm({ cabinToupdate = {} }) {
 
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
-    if (isupdateSession)
+    if (isUpdateSession)
       updateCabin(
         { newCabinData: { ...data, image }, id: updateId },
         { onSuccess: () => reset() }
@@ -112,7 +112,7 @@ function CreateCabinForm({ cabinToupdate = {} }) {
           id="image"
           accept="image/*"
           {...register("image", {
-            required: isupdateSession ? false : "This field is required",
+            required: isUpdateSession ? false : "This field is required",
           })}
         />
       </FormRow>
@@ -123,7 +123,7 @@ function CreateCabinForm({ cabinToupdate = {} }) {
           Cancel
         </Button>
         <Button disabled={isCreating}>
-          {isupdateSession ? "Update cabin" : "Create new cabin"}
+          {isUpdateSession ? "Update cabin" : "Create new cabin"}
         </Button>
       </FormRow>
     </Form>
