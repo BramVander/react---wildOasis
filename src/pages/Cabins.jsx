@@ -1,9 +1,8 @@
 import { useState } from "react";
 import CabinTable from "../features/cabins/CabinTable";
-import CreateCabinForm from "../features/cabins/CreateCabinForm";
 import Heading from "../ui/Heading";
-import Button from "../ui/Button";
 import Row from "../ui/Row";
+import AddCabin from "../features/cabins/AddCabin.jsx"
 
 function Cabins() {
   const [showForm, setShowForm] = useState(false);
@@ -18,10 +17,7 @@ function Cabins() {
       <Row>
         <CabinTable />
 
-        <Button onClick={() => setShowForm((show) => !show)}>
-          {!showForm ? "Add new cabin" : "Hide form"}
-        </Button>
-        {showForm && <CreateCabinForm></CreateCabinForm>}
+        <AddCabin></AddCabin>
       </Row>
     </>
   );
